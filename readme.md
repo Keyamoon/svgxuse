@@ -17,5 +17,5 @@ IE (9, 10, 11) fails to load **symbol-defs.svg** in the example above. svgxuse g
 
 ## License
 
-MIT &copy; [IcoMoon](https://icomoon.io)
+MIT &copy; [IcoMoon.io](https://icomoon.io)
 
