@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.0.0
+ * @version   1.0.1
  */
 /*jslint browser: true*/
 /*global XDomainRequest*/
