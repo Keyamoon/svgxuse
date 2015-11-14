@@ -70,6 +70,7 @@ if (window && window.addEventListener) {
                 }
             }
         }
+        cache = uses = ''; // for earlier garbage collection
     }, false);
 }
 
