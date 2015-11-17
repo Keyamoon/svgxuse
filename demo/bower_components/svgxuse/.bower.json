@@ -16,15 +16,14 @@
     "demo"
   ],
   "homepage": "https://github.com/Keyamoon/svgxuse",
-  "version": "1.0.1",
-  "_release": "1.0.1",
+  "version": "1.0.2",
+  "_release": "1.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.1",
-    "commit": "bd79eaee7be0c92996db7e50aef76b4dc225e956"
+    "tag": "v1.0.2",
+    "commit": "252997f42e4a7fceaa06b86255c22ffab4feb5cb"
   },
   "_source": "git://github.com/Keyamoon/svgxuse.git",
   "_target": "~1.0.1",
-  "_originalSource": "svgxuse",
-  "_direct": true
+  "_originalSource": "svgxuse"
 }
