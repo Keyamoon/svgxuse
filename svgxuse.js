@@ -2,13 +2,14 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.0.1
+ * @version   1.0.2
  */
 /*jslint browser: true*/
 /*global XDomainRequest*/
+(function () {
 if (window && window.addEventListener) {
-    // The load event fires when all resources have finished loading; which allows detecting whether SVG use elements are empty.
-    window.addEventListener('load', function () {
+    // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
+    window.addEventListener('load', function svgxuse() {
         'use strict';
         var base,
             bcr,
@@ -20,12 +21,13 @@ if (window && window.addEventListener) {
             url,
             uses,
             xhr;
+        window.removeEventListener('load', svgxuse, false); // to prevent memory leaks
         if (XMLHttpRequest) {
             request = new XMLHttpRequest();
             if (request.withCredentials !== undefined) {
                 request = XMLHttpRequest;
             } else {
-                request = XDomainRequest || false;
+                request = XDomainRequest || undefined;
             }
         }
         if (request === undefined) {
@@ -73,4 +75,4 @@ if (window && window.addEventListener) {
         cache = uses = ''; // for earlier garbage collection
     }, false);
 }
-
+}());
