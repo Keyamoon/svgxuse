@@ -77,7 +77,9 @@
                     xhr.onload = null;
                     x.innerHTML = xhr.responseText;
                     // Add a class which can be target to manipulate inserted svg symbols
-                    x.firstChild.classList.add('svgxuse-symbols'):
+                    if(x.firstChild) {
+                        x.firstChild.classList.add('svgxuse-symbols');
+                    }
                     body.insertBefore(x.firstChild, body.firstChild);
                     observeIfDone();
                 };
