@@ -15,7 +15,13 @@
     <p><strong>Notice</strong>: This demo (along with "symbol-defs.svg" and "svgxuse.js" files) should be <b>hosted on a web server</b> to work properly.</p>
 </div>
 </header>
-	<div class="clearfix mhl ptl">
+    <div class="mhl ptl">
+        <p>You may use the following buttons to dynamically add icons to the page.</p>
+        <button id="btn-couch">Add icon-couch</button>
+        <button id="btn-star">Add icon-star</button>
+        <button id="btn-heart">Add icon-heart</button>
+    </div>
+	<div id="set" class="clearfix mhl ptl">
 		<h1 class="mvm mtn fgc1">Grid Size: 20</h1>
 		<div class="glyph fs1">
 			<div class="clearfix pbs">
@@ -38,8 +44,35 @@
 			</div>
 		</div>
 	</div>
-    <footer><p></p></footer>
 <script defer src="bower_components/svgxuse/svgxuse.js"></script>
+<script>
+// Add events handlers to demo buttons
+(function () {
+    'use strict';
+    var setDiv = document.getElementById('set');
+    function getSVGString(name, url) {
+        return '<svg class="icon icon-' + name + '"><use xlink:href="' + url + '#icon-' + name + '"></use></svg><span class="mls"> icon-' + name + '</span>'
+    }
+    document.getElementById('btn-couch').addEventListener('click', function () {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'glyph fs1');
+        div.innerHTML = getSVGString('couch', 'symbol-defs.svg');
+        setDiv.appendChild(div);
+    }, false);
+    document.getElementById('btn-heart').addEventListener('click', function () {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'glyph fs1');
+        div.innerHTML = getSVGString('heart', 'symbol-defs2.svg');
+        setDiv.appendChild(div);
+    }, false);
+    document.getElementById('btn-star').addEventListener('click', function () {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'glyph fs1');
+        div.innerHTML = getSVGString('star', 'symbol-defs2.svg');
+        setDiv.appendChild(div);
+    }, false);
+}());
+</script>
 </body>
 </html>
 
