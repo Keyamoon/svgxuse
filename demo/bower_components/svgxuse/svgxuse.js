@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.0
+ * @version   1.1.1
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -76,7 +76,7 @@
                         x = document.createElement('x');
                     xhr.onload = null;
                     x.innerHTML = xhr.responseText;
-                    body.insertBefore(x.firstChild, body.firstChild);
+                    body.insertBefore(x.getElementsByTagName('svg')[0], body.firstChild);
                     observeIfDone();
                 };
             }
