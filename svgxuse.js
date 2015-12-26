@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.1
+ * @version   1.1.2
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -27,7 +27,7 @@
                     childList: true,
                     subtree: true,
                     attributes: true,
-                    attributeFilter: ['xlink:href']
+                    attributeFilter: ['href']
                 });
                 unobserveChanges = function () {
                     try {
@@ -41,6 +41,7 @@
                 };
             }
         };
+        var xlinkNS = 'http://www.w3.org/1999/xlink';
         checkUseElems = function () {
             var base,
                 bcr,
@@ -93,11 +94,11 @@
             for (i = 0; i < uses.length; i += 1) {
                 try {
                     bcr = uses[i].getBoundingClientRect();
-                } catch (e) {
+                } catch (ignore) {
                     // failed to get bounding rectangle of the use element
                     bcr = false;
                 }
-                url = uses[i].getAttribute('xlink:href').split('#');
+                url = uses[i].getAttributeNS(xlinkNS, 'href').split('#');
                 base = url[0];
                 hash = url[1];
                 if (bcr && bcr.width === 0 && bcr.height === 0) {
@@ -110,7 +111,7 @@
                     if (base.length) {
                         xhr = cache[base];
                         if (xhr !== true) {
-                            uses[i].setAttribute('xlink:href', '#' + hash);
+                            uses[i].setAttributeNS(xlinkNS, 'href', '#' + hash);
                         }
                         if (xhr === undefined) {
                             xhr = new Request();
