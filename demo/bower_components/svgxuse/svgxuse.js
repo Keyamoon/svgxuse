@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.2
+ * @version   1.1.3
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -111,7 +111,7 @@
                     if (base.length) {
                         xhr = cache[base];
                         if (xhr !== true) {
-                            uses[i].setAttributeNS(xlinkNS, 'href', '#' + hash);
+                            uses[i].setAttributeNS(xlinkNS, 'xlink:href', '#' + hash);
                         }
                         if (xhr === undefined) {
                             xhr = new Request();
