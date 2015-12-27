@@ -29,6 +29,13 @@ Instead of replacing `<use>` elements with SVG paths, svgxuse only adds symbol d
 ```html
 <script src="svgxuse.js" defer></script>
 ```
+#### With Bower
+```bash
+bower install --save svgxuse
+```
+```html
+<script defer src="bower_components/svgxuse/svgxuse.js"></script>
+```
 
 ## License
 
