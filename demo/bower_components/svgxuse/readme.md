@@ -21,11 +21,27 @@ Using svgxuse, your SVG would still load as long as it is served with proper COR
 svgxuse is a polyfill and therefore doesn't need to support IE8. It's minimal and to the point.
 #### No requestAnimationFrame or setTimeout for polling the DOM
 Unlike similar solutions, svgxuse doesn't use requestAnimationFrame or setTimeout for polling the DOM.
+#### No repetitive addition of inline SVGs
+Instead of replacing `<use>` elements with SVG paths, svgxuse only adds symbol definitions to the markup once.
 
 ## Usage
 
 ```html
 <script src="svgxuse.js" defer></script>
+```
+#### With NPM
+```bash
+npm install --save svgxuse
+```
+```html
+<script defer src="node_modules/svgxuse/svgxuse.js"></script>
+```
+#### With Bower
+```bash
+bower install --save svgxuse
+```
+```html
+<script defer src="bower_components/svgxuse/svgxuse.js"></script>
 ```
 
 ## License
