@@ -3,6 +3,10 @@
   "version": "1.1.4",
   "description": "A polyfill that fetches external SVGs referenced in use elements when the browser itself fails to do so.",
   "main": "svgxuse.js",
+  "files": [
+      "svgxuse.js",
+      "svgxuse.min.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Keyamoon/svgxuse.git"
