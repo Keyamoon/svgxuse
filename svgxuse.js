@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.4
+ * @version   1.1.5
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -26,8 +26,7 @@
                 observer.observe(document.body, {
                     childList: true,
                     subtree: true,
-                    attributes: true,
-                    attributeFilter: ['href']
+                    attributes: true
                 });
                 unobserveChanges = function () {
                     try {
@@ -50,6 +49,7 @@
                 i,
                 Request,
                 inProgressCount = 0,
+                isHidden,
                 url,
                 uses,
                 xhr;
@@ -108,7 +108,8 @@
                 url = uses[i].getAttributeNS(xlinkNS, 'href').split('#');
                 base = url[0];
                 hash = url[1];
-                if (bcr && bcr.width === 0 && bcr.height === 0) {
+                isHidden = bcr && bcr.left === 0 && bcr.right === 0;
+                if (bcr && bcr.width === 0 && bcr.height === 0 && !isHidden) {
                     // the use element is empty
                     // if there is a reference to an external SVG, try to fetch it
                     // use the optional fallback URL if there is no reference to an external SVG
@@ -133,7 +134,7 @@
                     }
                 } else {
                     // remember this URL if the use element was not empty and no request was sent
-                    if (cache[base] === undefined) {
+                    if (!isHidden && cache[base] === undefined) {
                         cache[base] = true;
                     }
                 }
