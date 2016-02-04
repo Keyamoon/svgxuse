@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2015 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.5
+ * @version   1.1.6
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -23,7 +23,7 @@
             var observer;
             if (window.MutationObserver) {
                 observer = new MutationObserver(debouncedCheck);
-                observer.observe(document.body, {
+                observer.observe(document.documentElement, {
                     childList: true,
                     subtree: true,
                     attributes: true
@@ -34,9 +34,9 @@
                     } catch (ignore) {}
                 };
             } else {
-                document.body.addEventListener('DOMSubtreeModified', debouncedCheck, false);
+                document.documentElement.addEventListener('DOMSubtreeModified', debouncedCheck, false);
                 unobserveChanges = function () {
-                    document.body.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
+                    document.documentElement.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
                 };
             }
         };
