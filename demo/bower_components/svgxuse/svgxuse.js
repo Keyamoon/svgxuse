@@ -1,8 +1,8 @@
 /*!
- * @copyright Copyright (c) 2015 IcoMoon.io
+ * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.6
+ * @version   1.1.7
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -108,7 +108,7 @@
                 url = uses[i].getAttributeNS(xlinkNS, 'href').split('#');
                 base = url[0];
                 hash = url[1];
-                isHidden = bcr && bcr.left === 0 && bcr.right === 0;
+                isHidden = bcr && bcr.left === 0 && bcr.right === 0 && bcr.top === 0 && bcr.bottom === 0;
                 if (bcr && bcr.width === 0 && bcr.height === 0 && !isHidden) {
                     // the use element is empty
                     // if there is a reference to an external SVG, try to fetch it
