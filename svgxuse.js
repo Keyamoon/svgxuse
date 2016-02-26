@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.8
+ * @version   1.1.9
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -89,6 +89,7 @@
                         svg.style.position = 'absolute';
                         svg.style.width = 0;
                         svg.style.height = 0;
+                        svg.style.visibility = 'hidden';
                         body.insertBefore(svg, body.firstChild);
                     }
                     observeIfDone();
