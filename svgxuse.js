@@ -89,6 +89,7 @@
                         svg.style.position = 'absolute';
                         svg.style.width = 0;
                         svg.style.height = 0;
+                        svg.style.display = 'none';
                         body.insertBefore(svg, body.firstChild);
                     }
                     observeIfDone();
