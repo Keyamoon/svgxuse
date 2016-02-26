@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.7
+ * @version   1.1.8
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -21,6 +21,8 @@
         };
         var observeChanges = function () {
             var observer;
+            window.addEventListener('resize', debouncedCheck, false);
+            window.addEventListener('orientationchange', debouncedCheck, false);
             if (window.MutationObserver) {
                 observer = new MutationObserver(debouncedCheck);
                 observer.observe(document.documentElement, {
@@ -31,12 +33,16 @@
                 unobserveChanges = function () {
                     try {
                         observer.disconnect();
+                        window.removeEventListener('resize', debouncedCheck, false);
+                        window.removeEventListener('orientationchange', debouncedCheck, false);
                     } catch (ignore) {}
                 };
             } else {
                 document.documentElement.addEventListener('DOMSubtreeModified', debouncedCheck, false);
                 unobserveChanges = function () {
                     document.documentElement.removeEventListener('DOMSubtreeModified', debouncedCheck, false);
+                    window.removeEventListener('resize', debouncedCheck, false);
+                    window.removeEventListener('orientationchange', debouncedCheck, false);
                 };
             }
         };
@@ -150,4 +156,3 @@
         }, false);
     }
 }());
-
