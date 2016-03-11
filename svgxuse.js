@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.10
+ * @version   1.1.11
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -153,7 +153,7 @@
         // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
         window.addEventListener('load', function winLoad() {
             window.removeEventListener('load', winLoad, false); // to prevent memory leaks
-            checkUseElems();
+            tid = setTimeout(checkUseElems, 0);
         }, false);
     }
 }());
