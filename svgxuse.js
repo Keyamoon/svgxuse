@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.13
+ * @version   1.1.14
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -77,14 +77,14 @@
                     observeChanges(); // watch for changes to DOM
                 }
             }
-            function scheduleAttrUpdate(spec) {
+            function attrUpdateFunc(spec) {
                 return function () {
                     if (cache[spec.base] !== true) {
                         spec.useEl.setAttributeNS(xlinkNS, 'xlink:href', '#' + spec.hash);
                     }
                 };
             }
-            function onload(xhr) {
+            function onloadFunc(xhr) {
                 return function () {
                     var body = document.body;
                     var x = document.createElement('x');
@@ -132,7 +132,7 @@
                     }
                     if (base.length) {
                         // schedule updating xlink:href
-                        setTimeout(scheduleAttrUpdate({
+                        setTimeout(attrUpdateFunc({
                             useEl: uses[i],
                             base: base,
                             hash: hash
@@ -141,7 +141,7 @@
                         if (xhr === undefined) {
                             xhr = new Request();
                             cache[base] = xhr;
-                            xhr.onload = onload(xhr);
+                            xhr.onload = onloadFunc(xhr);
                             xhr.onerror = onErrorTimeout(xhr);
                             xhr.ontimeout = onErrorTimeout(xhr);
                             xhr.open('GET', base);
