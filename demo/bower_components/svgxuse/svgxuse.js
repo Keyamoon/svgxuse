@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.11
+ * @version   1.1.12
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -140,9 +140,17 @@
                         }
                     }
                 } else {
-                    // remember this URL if the use element was not empty and no request was sent
-                    if (!isHidden && cache[base] === undefined) {
-                        cache[base] = true;
+                    if (!isHidden) {
+                        if (cache[base] === undefined) {
+                            // remember this URL if the use element was not empty and no request was sent
+                            cache[base] = true;
+                        } else if (cache[base].onload) {
+                            // if it turns out that prepending the SVG is not necessary,
+                            // abort the in-progress xhr.
+                            cache[base].abort();
+                            cache[base].onload = undefined;
+                            cache[base] = true;
+                        }
                     }
                 }
             }
