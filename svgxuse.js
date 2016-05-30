@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.16
+ * @version   1.1.17
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -46,6 +46,29 @@
                 };
             }
         };
+        var createRequest = function (url) {
+            // In IE 9, cross domain requests can only be sent using XDomainRequest.
+            // XDomainRequest would fail if CORS headers are not set.
+            // Therefore, XDomainRequest should only be used with cross domain requests.
+            function getHostname(href) {
+                var a = document.createElement('a');
+                a.href = href;
+                return a.hostname;
+            }
+            var Request;
+            var hname = location.hostname;
+            var hname2;
+            if (window.XMLHttpRequest) {
+                Request = new XMLHttpRequest();
+                hname2 = getHostname(url);
+                if (Request.withCredentials === undefined && hname2 !== '' && hname2 !== hname) {
+                    Request = XDomainRequest || undefined;
+                } else {
+                    Request = XMLHttpRequest;
+                }
+            }
+            return Request;
+        };
         var xlinkNS = 'http://www.w3.org/1999/xlink';
         checkUseElems = function () {
             var base,
@@ -53,23 +76,12 @@
                 fallback = '', // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
                 hash,
                 i,
-                Request,
                 inProgressCount = 0,
                 isHidden,
+                Request,
                 url,
                 uses,
                 xhr;
-            if (window.XMLHttpRequest) {
-                Request = new XMLHttpRequest();
-                if (Request.withCredentials !== undefined) {
-                    Request = XMLHttpRequest;
-                } else {
-                    Request = XDomainRequest || undefined;
-                }
-            }
-            if (Request === undefined) {
-                return;
-            }
             function observeIfDone() {
                 // If done with making changes, start watching for chagnes in DOM again
                 inProgressCount -= 1;
@@ -143,14 +155,17 @@
                             }), 0);
                         }
                         if (xhr === undefined) {
-                            xhr = new Request();
-                            cache[base] = xhr;
-                            xhr.onload = onloadFunc(xhr);
-                            xhr.onerror = onErrorTimeout(xhr);
-                            xhr.ontimeout = onErrorTimeout(xhr);
-                            xhr.open('GET', base);
-                            xhr.send();
-                            inProgressCount += 1;
+                            Request = createRequest(base);
+                            if (Request !== undefined) {
+                                xhr = new Request();
+                                cache[base] = xhr;
+                                xhr.onload = onloadFunc(xhr);
+                                xhr.onerror = onErrorTimeout(xhr);
+                                xhr.ontimeout = onErrorTimeout(xhr);
+                                xhr.open('GET', base);
+                                xhr.send();
+                                inProgressCount += 1;
+                            }
                         }
                     }
                 } else {
