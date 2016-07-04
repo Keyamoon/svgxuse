@@ -10,8 +10,8 @@
     'use strict';
     if (window && window.addEventListener) {
         var cache = Object.create(null); // holds xhr objects to prevent multiple requests
-        var checkUseElems,
-            tid; // timeout id
+        var checkUseElems;
+        var tid; // timeout id
         var debouncedCheck = function () {
             clearTimeout(tid);
             tid = setTimeout(checkUseElems, 100);
@@ -71,17 +71,17 @@
         };
         var xlinkNS = 'http://www.w3.org/1999/xlink';
         checkUseElems = function () {
-            var base,
-                bcr,
-                fallback = '', // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
-                hash,
-                i,
-                inProgressCount = 0,
-                isHidden,
-                Request,
-                url,
-                uses,
-                xhr;
+            var base;
+            var bcr;
+            var fallback = ''; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
+            var hash;
+            var i;
+            var inProgressCount = 0;
+            var isHidden;
+            var Request;
+            var url;
+            var uses;
+            var xhr;
             function observeIfDone() {
                 // If done with making changes, start watching for chagnes in DOM again
                 inProgressCount -= 1;
@@ -177,7 +177,7 @@
                             // if it turns out that prepending the SVG is not necessary,
                             // abort the in-progress xhr.
                             cache[base].abort();
-                            cache[base].onload = undefined;
+                            delete cache[base].onload;
                             cache[base] = true;
                         }
                     }
