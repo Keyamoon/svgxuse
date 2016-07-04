@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.17
+ * @version   1.1.18
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -86,6 +86,7 @@
                 // If done with making changes, start watching for chagnes in DOM again
                 inProgressCount -= 1;
                 if (inProgressCount === 0) { // if all xhrs were resolved
+                    unobserveChanges(); // make sure to remove old handlers
                     observeChanges(); // watch for changes to DOM
                 }
             }
