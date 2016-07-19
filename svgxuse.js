@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.18
+ * @version   1.1.19
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -181,6 +181,12 @@
                             delete cache[base].onload;
                             cache[base] = true;
                         }
+                    } else if (cache[base] && cache[base] !== true) {
+                        attrUpdateFunc({
+                            useEl: uses[i],
+                            base: base,
+                            hash: hash
+                        })();
                     }
                 }
             }
