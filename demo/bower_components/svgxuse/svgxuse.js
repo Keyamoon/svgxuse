@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2016 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.20
+ * @version   1.1.21
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -75,6 +75,7 @@
             var bcr;
             var fallback = ''; // optional fallback URL in case no base path to SVG file was given and no symbol definition was found.
             var hash;
+            var href;
             var i;
             var inProgressCount = 0;
             var isHidden;
@@ -133,7 +134,12 @@
                     // failed to get bounding rectangle of the use element
                     bcr = false;
                 }
-                url = uses[i].getAttributeNS(xlinkNS, 'href').split('#');
+                href = uses[i].getAttributeNS(xlinkNS, 'href');
+                if (href && href.split) {
+                    url = href.split('#');
+                } else {
+                    url = ["", ""];
+                }
                 base = url[0];
                 hash = url[1];
                 isHidden = bcr && bcr.left === 0 && bcr.right === 0 && bcr.top === 0 && bcr.bottom === 0;
