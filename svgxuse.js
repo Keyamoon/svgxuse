@@ -67,7 +67,7 @@
                 Request = new XMLHttpRequest();
                 origin = getOrigin(location);
                 origin2 = getOrigin(url);
-                if (Request.withCredentials === undefined && origin2 !== '' && origin2 !== origin) {
+                if (Request.withCredentials === undefined && origin2 !== '' && origin2 !== ':' && origin2 !== origin) {
                     Request = XDomainRequest || undefined;
                 } else {
                     Request = XMLHttpRequest;
