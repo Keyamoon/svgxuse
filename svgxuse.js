@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2017 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.2.0
+ * @version   1.2.1
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -149,6 +149,8 @@
                 if (!href) {
                     href = uses[i].getAttributeNS(xlinkNS, "href");
                     isXlink = true;
+                } else {
+                    isXlink = false;
                 }
                 if (href && href.split) {
                     url = href.split("#");
