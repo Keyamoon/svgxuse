@@ -1,8 +1,8 @@
 /*!
- * @copyright Copyright (c) 2016 IcoMoon.io
+ * @copyright Copyright (c) 2017 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.1.23
+ * @version   1.2.0
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -85,6 +85,7 @@
             var i;
             var inProgressCount = 0;
             var isHidden;
+            var isXlink = false;
             var Request;
             var url;
             var uses;
@@ -100,7 +101,11 @@
             function attrUpdateFunc(spec) {
                 return function () {
                     if (cache[spec.base] !== true) {
-                        spec.useEl.setAttributeNS(xlinkNS, "xlink:href", "#" + spec.hash);
+                        if (spec.isXlink) {
+                            spec.useEl.setAttributeNS(xlinkNS, "xlink:href", "#" + spec.hash);
+                        } else {
+                            spec.useEl.setAttribute("href", "#" + spec.hash);
+                        }
                     }
                 };
             }
@@ -140,7 +145,11 @@
                     // failed to get bounding rectangle of the use element
                     bcr = false;
                 }
-                href = uses[i].getAttributeNS(xlinkNS, "href");
+                href = uses[i].getAttribute("href");
+                if (!href) {
+                    href = uses[i].getAttributeNS(xlinkNS, "href");
+                    isXlink = true;
+                }
                 if (href && href.split) {
                     url = href.split("#");
                 } else {
@@ -164,7 +173,8 @@
                             setTimeout(attrUpdateFunc({
                                 useEl: uses[i],
                                 base: base,
-                                hash: hash
+                                hash: hash,
+                                isXlink: isXlink
                             }), 0);
                         }
                         if (xhr === undefined) {
