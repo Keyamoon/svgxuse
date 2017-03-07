@@ -1,6 +1,6 @@
 {
   "name": "svgxuse",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A polyfill that fetches external SVGs referenced in use elements when the browser itself fails to do so.",
   "main": "svgxuse.js",
   "files": [
