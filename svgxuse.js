@@ -8,7 +8,7 @@
 /*global XDomainRequest, MutationObserver, window */
 (function () {
     "use strict";
-    if (window && window.addEventListener) {
+    if (typeof window !== "undefined" && window.addEventListener) {
         var cache = Object.create(null); // holds xhr objects to prevent multiple requests
         var checkUseElems;
         var tid; // timeout id
