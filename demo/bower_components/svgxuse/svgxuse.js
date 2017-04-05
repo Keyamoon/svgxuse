@@ -2,13 +2,13 @@
  * @copyright Copyright (c) 2017 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.2.2
+ * @version   1.2.4
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
 (function () {
     "use strict";
-    if (window && window.addEventListener) {
+    if (typeof window !== "undefined" && window.addEventListener) {
         var cache = Object.create(null); // holds xhr objects to prevent multiple requests
         var checkUseElems;
         var tid; // timeout id
@@ -219,10 +219,17 @@
             inProgressCount += 1;
             observeIfDone();
         };
-        // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
-        window.addEventListener("load", function winLoad() {
+        var winLoad;
+        winLoad = function () {
             window.removeEventListener("load", winLoad, false); // to prevent memory leaks
             tid = setTimeout(checkUseElems, 0);
-        }, false);
+        };
+        if (document.readyState !== "complete") {
+            // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
+            window.addEventListener("load", winLoad, false);
+        } else {
+            // No need to add a listener if the document is already loaded, initialize immediately.
+            winLoad();
+        }
     }
 }());
