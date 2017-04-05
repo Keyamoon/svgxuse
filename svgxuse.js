@@ -218,11 +218,18 @@
             uses = "";
             inProgressCount += 1;
             observeIfDone();
-        };
-        // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
-        window.addEventListener("load", function winLoad() {
+        }        
+        function winLoad() {
             window.removeEventListener("load", winLoad, false); // to prevent memory leaks
             tid = setTimeout(checkUseElems, 0);
-        }, false);
+        }
+
+        if (document.readyState !== "complete") {
+          // The load event fires when all resources have finished loading, which allows detecting whether SVG use elements are empty.
+          window.addEventListener("load", winLoad, false);
+        } else {
+          // No need to add a listener if the document is already loaded, initialize immediately.
+          winLoad();
+        }
     }
 }());
