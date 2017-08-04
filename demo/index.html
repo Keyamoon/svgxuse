@@ -20,6 +20,7 @@
         <button id="btn-couch">Add icon-couch</button>
         <button id="btn-star">Add icon-star</button>
         <button id="btn-heart">Add icon-heart</button>
+        <button id="btn-paper-airplane">Add icon-paper-airplane</button>
     </div>
 	<div id="set" class="clearfix mhl ptl">
 		<h1 class="mvm mtn fgc1">Grid Size: 20</h1>
@@ -36,11 +37,6 @@
 		<div class="glyph fs1">
 			<div class="clearfix pbs">
 				<svg class="icon icon-tornado"><use xlink:href="symbol-defs.svg#icon-tornado"></use></svg><span class="mls"> icon-tornado</span>
-			</div>
-		</div>
-		<div class="glyph fs1">
-			<div class="clearfix pbs">
-				<svg class="icon icon-paper-plane"><use xlink:href="symbol-defs.svg#icon-paper-plane"></use></svg><span class="mls"> icon-paper-plane</span>
 			</div>
 		</div>
 	</div>
@@ -71,6 +67,38 @@
         div.innerHTML = getSVGString('star', 'symbol-defs2.svg');
         setDiv.appendChild(div);
     }, false);
+
+    document.getElementById('btn-paper-airplane').addEventListener('click', function () {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'glyph fs1');
+
+        var divInner = document.createElement('div');
+        divInner.className = 'clearfix pbs';
+
+        var svgNS = 'http://www.w3.org/2000/svg';
+
+        var svg = document.createElementNS(svgNS, 'svg');
+        svg.setAttributeNS(null, 'class', 'icon icon-paper-airplane');
+
+        var use = document.createElementNS(svgNS, 'use');
+        use.setAttributeNS(null, 'href', '/demo/symbol-defs.svg#icon-paper-plane');
+
+        var span = document.createElement('span');
+        span.className = 'mls';
+        span.innerText = 'icon-paper-airplane';
+
+        svg.appendChild(use);
+
+        div.appendChild(divInner);
+
+        divInner.appendChild(svg);
+        divInner.appendChild(span);
+
+        setDiv.appendChild(div);
+    }, false);
+
+        return '<svg class="icon icon-' + name + '"><use xlink:href="' + url + '#icon-' + name + '"></use></svg><span class="mls"> icon-' + name + '</span>'
+
 }());
 </script>
 </body>

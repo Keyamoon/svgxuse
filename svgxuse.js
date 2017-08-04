@@ -102,9 +102,9 @@
                 return function () {
                     if (cache[spec.base] !== true) {
                         if (spec.isXlink) {
-                            spec.useEl.setAttributeNS(xlinkNS, "xlink:href", "#" + spec.hash);
+                            spec.useEl.setAttributeNS(xlinkNS, "xlink:href", spec.base + "#" + spec.hash);
                         } else {
-                            spec.useEl.setAttribute("href", "#" + spec.hash);
+                            spec.useEl.setAttribute("href", spec.base + "#" + spec.hash);
                         }
                     }
                 };
