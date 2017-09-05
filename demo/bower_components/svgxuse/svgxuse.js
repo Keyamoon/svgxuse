@@ -2,7 +2,7 @@
  * @copyright Copyright (c) 2017 IcoMoon.io
  * @license   Licensed under MIT license
  *            See https://github.com/Keyamoon/svgxuse
- * @version   1.2.5
+ * @version   1.2.6
  */
 /*jslint browser: true */
 /*global XDomainRequest, MutationObserver, window */
@@ -160,6 +160,9 @@
                     // use the optional fallback URL if there is no reference to an external SVG
                     if (fallback && !base.length && hash && !document.getElementById(hash)) {
                         base = fallback;
+                    }
+                    if (uses[i].hasAttribute("href")) {
+                        uses[i].setAttributeNS(xlinkNS, "xlink:href", href);
                     }
                     if (base.length) {
                         // schedule updating xlink:href
