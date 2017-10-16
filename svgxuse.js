@@ -189,6 +189,16 @@
                             }
                         }
                     }
+                    // fallback to forcing a repaint
+                    // logically when reaching this point, you still have a zero height/width element 
+                    // if none of the solutions were attempted
+                    if (!base.length || !(xhr !== true || xhr === undefined)) {
+                        if (isXlink) {
+                            uses[i].setAttributeNS(xlinkNS, "xlink:href", base + '#' + hash);
+                        } else {
+                            uses[i].setAttribute("href", base + '#' + hash);
+                        }
+                    }
                 } else {
                     if (!isHidden) {
                         if (cache[base] === undefined) {
