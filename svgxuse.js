@@ -24,7 +24,7 @@
             window.addEventListener("resize", debouncedCheck, false);
             window.addEventListener("orientationchange", debouncedCheck, false);
             if (window.MutationObserver) {
-                observer = new MutationObserver(debouncedCheck);
+                observer = new window.MutationObserver(debouncedCheck);
                 observer.observe(document.documentElement, {
                     childList: true,
                     subtree: true,
